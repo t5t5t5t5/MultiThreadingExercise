@@ -1,0 +1,132 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace MultiThreadeningExercise
+{
+    public class MyThreadClass
+    {
+        public static void ProgramStarting()//Count down to start the program
+        {
+            Console.WriteLine("Thread 1 Started");
+            Console.WriteLine("The program will start in:");
+            
+            for(int i = 3; i > 0; i--)
+            {
+                Console.WriteLine(i);
+                Thread.Sleep(1000);
+            }
+
+            Console.WriteLine("---Welcome to the Program---");
+            Console.WriteLine("Thread 1 finished");
+            
+        }
+
+        public static double AskOpposite()//get Opposite = a
+        {
+            Console.WriteLine("Thread 2 Started");
+            double opposite = 0;
+            bool doAgain = false;
+            do
+            {
+                doAgain = false;
+                Console.WriteLine("Please type the opposite length of the right triangle");
+                try
+                {
+                    opposite = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("---Error---" + e);
+                    doAgain = true;
+                    //throw;
+                }  
+            } while (doAgain == true);
+            Console.WriteLine("Thread 2 Finished");
+            return opposite;
+        }
+
+        public static double GetHypotenuse(double a, double b)//get hypotenuse = c
+        {
+            Console.WriteLine("Thread 1 Started");
+            double hypotenuse = 0;
+
+            hypotenuse = Math.Sqrt((Math.Pow(a, 2) + Math.Pow(b, 2)));
+            Console.WriteLine("Hypotenuse computed");
+            Console.WriteLine("Thread 1 Finished");
+            return hypotenuse;
+        }
+
+        public static double AskAdjacent()//get Adjacent = b
+        {
+            Console.WriteLine("Thread 3 Started");
+            double adjacent = 0;
+            bool doAgain = false;
+            do
+            {
+                doAgain = false;
+                Console.WriteLine("Please type the adjacent length of the right triangle");
+                try
+                {
+                    adjacent = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("---Error---" + e);
+                    doAgain = true;
+                    throw;
+                }
+            } while (doAgain == true);
+            Console.WriteLine("Thread 3 Finished");
+            return adjacent;
+        }
+        //calculate sin
+        public static double CalcSin(double a, double c)
+        {
+            Console.WriteLine("Thread 2 Started");
+            double sin = 0;
+            sin = Math.Floor((a / c) * 10000) / 10000;
+            Console.WriteLine("Sin computed");
+            Console.WriteLine("Thread 2 Finished");
+            return sin;
+        }
+        //calculate cos
+        public static double CalcCos(double b, double c)
+        {
+            Console.WriteLine("Thread 3 Started");
+            double cos = 0;
+            cos = Math.Floor((b / c) * 10000) / 10000;
+            Console.WriteLine("Cos computed");
+            Console.WriteLine("Thread 3 Finished");
+            return cos;
+        }
+
+        //calculate tan
+        public static double CalcTan(double sin, double cos)
+        {
+            Console.WriteLine("Thread 1 Started");
+            double tan = 0;
+            tan = Math.Floor((sin / cos) * 10000) / 10000;
+            Console.WriteLine("Tan computed");
+            Console.WriteLine("Thread 1 Finished");
+            return tan;
+        }
+
+        //display results
+        public static void DisplayResults(double a, double b, double c, double sin, double cos, double tan)
+        {
+            Console.WriteLine("Thread 2 Started");
+            Console.WriteLine("The side opposite -> " + a);
+            Console.WriteLine("The side adjacent -> " + b);
+            Console.WriteLine("The side hypotenuse -> " + c);
+            Console.WriteLine("The Sine -> " + sin);
+            Console.WriteLine("The Cosine -> " + cos);
+            Console.WriteLine("The Tangent -> " + tan);
+            Console.WriteLine("Thread 2 Finished");
+        }
+    }
+}
+
